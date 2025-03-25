@@ -1,3 +1,5 @@
+Working Area		Staging Area		Logical Area
+
 This is first GitHub practicle.
 
 ls- List of Files.
@@ -15,4 +17,13 @@ git add origin link of repository
 git push origin master
 git push -f origin master
 
+----- For see the difference -----
+--- working area and staging area ---
+
+git diff
 git difftool
+
+--- staging area to commited area
+
+git diff --staged
+git difftool --staged

@@ -1,0 +1,5 @@
+Difference between staging area and logical area.
+
+See the Difference.
+
+Hello Anuj

@@ -6,3 +6,13 @@ git config --global user.name "username"
 git config --global user.email "mailid"
 
 git status
+git config --list
+git init
+git status
+git add filename.abc
+git commit -m "Message"
+git add origin link of repository
+git push origin master
+git push -f origin master
+
+git difftool

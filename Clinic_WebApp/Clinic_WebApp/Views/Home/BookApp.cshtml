@@ -1,0 +1,52 @@
+﻿@model Clinic_WebApp.Models.BookAppoitment
+@{
+    ViewData["Title"] = "BookApp";
+    var doctors = ViewBag.Doctors as List<Clinic_WebApp.Models.Doctor>;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="appointment-form">
+        <h2>Book an Appointment</h2>
+        <form action="BookApp" method="post">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="pname" placeholder="Enter your full name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="pemail" placeholder="Enter your email" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="pphone" placeholder="Enter your phone number" required>
+            
+            <label for="doctor">Select Doctor</label>
+            <select asp-for="DoctorID" id="doctor" required>
+                <option value="">-- Select a Doctor --</option>
+                @if (doctors != null)
+                {
+                    foreach (var doctor in doctors)
+                    {
+                        <option value="@doctor.DoctorID">@doctor.dname</option>
+                    }
+                }
+            </select>
+            
+            <label for="date">Preferred Date</label>
+            <input type="date" id="date" name="pdate" required>
+
+            <label for="message">Additional Notes</label>
+            <textarea id="message" name="pmsg" rows="4" placeholder="Enter any additional details..."></textarea>
+
+            <centre><button type="submit">Submit Appointment</button></centre>
+            
+        </form>
+    </div>
+   
+    </body>
+    </html>
+
+

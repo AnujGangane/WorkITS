@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Clinic_WebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Clinic_WebApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="Main">
+        <div class="Header">
+            Welcome to Our Hospital
+        </div>
+        <div class="links">
+            <a href="/Home/DocLogin">Doctor Login</a>
+            <a href="/Home/BookApp">Book an Appointment</a>
+            <a href="/Home/DocInfo">Find a Doctor</a>
+            <a href="/Home/CreateDoc">Create Doctor</a>
+            <a href="#">Enquiry</a>
+            <a href="/Home/ContactUs">Contact Us</a>
+        </div>
+        <div class="content">
+            @RenderBody()
+            
+        </div>
+        <div class="footer">
+            &copy; 2025 Our Hospital. All Rights Reserved.
+        </div>
+    </div>
+</body>
+</html>

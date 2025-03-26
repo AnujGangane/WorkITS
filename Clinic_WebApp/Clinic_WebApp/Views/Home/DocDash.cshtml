@@ -1,0 +1,136 @@
+﻿@model List<Clinic_WebApp.Models.Doctor>
+@inject IHttpContextAccessor Accessor
+@{
+    ViewData["Title"] = "DocDash";
+    var appointments = ViewData["Appointments"] as List<BookAppoitment>;
+    // var doctorName = ViewData["DoctorName"];
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Welcome, @Accessor.HttpContext.Session.GetString("DoctorName")</h1>
+        <p>Your personalized dashboard</p>
+    </header>
+    <nav class="dashboard-nav">
+        <div>
+            <a href="/Home/ViewAppointments">View Appointments</a>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var x in Model)
+                {
+                    <a href="/Home/ManageProfile?id=@x.DoctorID">Manage New Profile (@x.dname)</a>
+                }
+            }
+            
+            <a href="/Home/PatientRecords">Patient Records</a>
+        </div>
+        <a href="/Home/Logout">Logout</a>
+    </nav>
+    <main class="dashboard-content">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card text-center p-3">
+                        <h5>Today's Appointments</h5>
+                        <p><i class="fas fa-calendar-check fa-2x text-primary"></i></p>
+                        <a href="/Home/ViewAppointments" class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center p-3">
+                        <h5>Manage Profile</h5>
+                        <p><i class="fas fa-user-edit fa-2x text-success"></i></p>
+                        <a href="/Home/ManageProfile" class="btn btn-success btn-sm">Edit Profile</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center p-3">
+                        <h5>Patient Records</h5>
+                        <p><i class="fas fa-file-medical-alt fa-2x text-warning"></i></p>
+                        <a href="/Home/PatientRecords" class="btn btn-warning btn-sm">View Records</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        &copy; 2025 Our Hospital. All Rights Reserved.
+    </footer>
+</body>
+<style>
+    
+
+    .dashboard-header {
+        background-color: #007bff;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .dashboard-header p {
+            margin: 5px 0 0;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+    .dashboard-nav {
+        background-color: #343a40;
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .dashboard-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+            .dashboard-nav a:hover {
+                text-decoration: underline;
+            }
+
+    .dashboard-content {
+        padding: 30px;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .card h5 {
+            font-size: 20px;
+        }
+
+    .footer {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 30px;
+        font-size: 14px;
+    }
+</style>
+
+</html>
+
+

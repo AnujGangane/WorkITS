@@ -1,0 +1,268 @@
+﻿@model List<Clinic_WebApp.Models.BookAppoitment>
+@inject IHttpContextAccessor Accessor
+@{
+    ViewData["Title"] = "ViewAppointments";
+    var appointments = ViewData["Appointments"] as List<BookAppoitment>;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Welcome, @Accessor.HttpContext.Session.GetString("DoctorName")</h1>
+        <p>Your personalized dashboard</p>
+    </header>
+    <nav class="dashboard-nav">
+        <div>
+            <a href="/Home/ViewAppointments">View Appointments</a>
+            <a href="/Home/ManageProfile">Manage Profile</a>
+            <a href="/Home/PatientRecords">Patient Records</a>
+        </div>
+        <a href="/Home/Logout">Logout</a>
+    </nav>
+    <main class="dashboard-content">
+        
+           
+                <h1 class="text-center">Appointments</h1>
+                <table class="table table-bordered table-striped mt-4">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Patient ID</th>
+                            <th>Patient Name</th>
+                            <th>Patient Email</th>
+                            <th>Patient Phone</th>
+                            <th>Patient Date</th>
+                            <th>Patient Disease/Message</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (appointments != null && appointments.Any())
+                        {
+                            foreach (var appointment in appointments)
+                            {
+                                <tr>
+                                    <td>@appointment.patientID</td>
+                                    <td>@appointment.pname</td>
+                                    <td>@appointment.pemail</td>
+                                    <td>@appointment.pphone</td>
+                                    <td>@appointment.pdate</td>
+                                    <td>@appointment.pmsg</td>
+                                    <td>
+                                        <a href="/Home/AccpetAppointments/@appointment.patientID" class="btn accept-btn" onclick="handleAccept(this)">Accept</a>
+                                        <a href="/Home/RejecttAppointments?id=@appointment.patientID" class="btn reject-btn" onclick="handleReject(this)">Reject</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center">No appointments found.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>        
+    </main>
+    <footer class="footer">
+        &copy; 2025 Our Hospital. All Rights Reserved.
+    </footer>
+</body>
+<style>
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn {
+        display: inline-block;
+        font-size: 14px; /* Small text size */
+        padding: 5px 10px; /* Small padding for a compact look */
+        margin: 2px; /* Small gap between buttons */
+        text-decoration: none; /* Remove underline */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer;
+        transition: all 0.3s ease; /* Smooth hover effect */
+    }
+
+    /* Accept button styling */
+    .accept-btn {
+        background-color: #28a745; /* Green background */
+        color: white; /* White text */
+    }
+
+        .accept-btn:hover {
+            background-color: #218838; /* Darker green on hover */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+        }
+
+    /* Reject button styling */
+    .reject-btn {
+        background-color: #dc3545; /* Red background */
+        color: white; /* White text */
+    }
+
+        .reject-btn:hover {
+            background-color: #c82333; /* Darker red on hover */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+        }
+
+    .dashboard-header {
+        background-color: #007bff;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .dashboard-header p {
+            margin: 5px 0 0;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+    .dashboard-nav {
+        background-color: #343a40;
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .dashboard-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+            .dashboard-nav a:hover {
+                text-decoration: underline;
+            }
+
+    .dashboard-content {
+        padding: 30px;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .card h5 {
+            font-size: 20px;
+        }
+
+    .footer {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 30px;
+        font-size: 14px;
+    }
+
+    
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    h1 {
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #4a4a4a;
+    }
+
+    .table {
+        background-color: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .table th {
+            background-color: #007bff;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    .btn {
+        margin-right: 5px;
+    }
+
+    .action-btns .btn {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .container {
+        margin-top: 50px;
+        max-width: 90%;
+    }
+
+    .no-data {
+        font-style: italic;
+        color: #888;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 15px;
+        background-color: #343a40;
+        color: #ffffff;
+    }
+
+</style>
+
+<script>
+    function handleAccept(button) {
+        const parentCell = button.parentElement;
+        const buttons = parentCell.querySelectorAll("button");
+
+        buttons.forEach(btn => {
+            btn.textContent = "Accepted";
+            btn.classList.remove("reject-btn");
+            btn.classList.add("accepted");
+            btn.setAttribute("disabled", true);
+        });
+    }
+
+    function handleReject(button) {
+        const parentCell = button.parentElement;
+        const buttons = parentCell.querySelectorAll("button");
+
+        buttons.forEach(btn => {
+            btn.textContent = "Rejected";
+            btn.classList.remove("accept-btn");
+            btn.classList.add("rejected");
+            btn.setAttribute("disabled", true);
+        });
+    }
+</script>
+
+

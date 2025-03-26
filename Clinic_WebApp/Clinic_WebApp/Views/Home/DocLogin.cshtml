@@ -1,0 +1,99 @@
+﻿@model Clinic_WebApp.Models.Doctor
+@{
+    ViewData["Title"] = "DocLogin";
+}
+
+<body>
+    <div class="login-container">
+        <h2>Doctor Login</h2>
+        <form action="/Home/DocLogin" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="dname" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="dphone" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <a href="#">Forgot Password?</a>
+        </form>
+    </div>
+</body>
+
+<style>
+    .login-container {
+        background-color: #ffffff;
+        width: 600px;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+        .login-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        .login-container .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .login-container label {
+            font-size: 14px;
+            color: #666666;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+
+            .login-container input[type="text"]:focus,
+            .login-container input[type="password"]:focus {
+                border-color: #4facfe;
+                box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
+            }
+
+        .login-container .btn {
+            background-color: #4facfe;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+            .login-container .btn:hover {
+                background-color: #00aaff;
+            }
+
+        .login-container a {
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #4facfe;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+            .login-container a:hover {
+                text-decoration: underline;
+            }
+</style>
+

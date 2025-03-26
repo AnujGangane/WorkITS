@@ -1,0 +1,155 @@
+﻿@model List<Clinic_WebApp.Models.Doctor>
+@{
+    ViewData["Title"] = "DocInfo";
+}
+
+<main class="dashboard-content">
+    <h1 class="text-center">Appointments</h1>
+    <table class="table table-bordered table-striped mt-4">
+        <thead class="table-primary">
+            <tr>
+                <th>Doctor ID</th>
+                <th>Doctor Name</th>
+                <th>Doctor Speciality</th>
+                               
+                <th>Total Patients Pendings</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var appointment in Model)
+                {
+                    <tr>
+                        <td>@appointment.DoctorID</td>
+                        <td>@appointment.dname</td>
+                        <td>@appointment.dspeciality</td>
+                        
+                        <td>@appointment.BookAppoitments.Count</td>
+                        
+                                              
+                    </tr>
+                }           
+        </tbody>
+    </table>
+</main>
+
+<style>
+
+    .dashboard-header {
+        background-color: #007bff;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .dashboard-header p {
+            margin: 5px 0 0;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+    .dashboard-nav {
+        background-color: #343a40;
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .dashboard-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+            .dashboard-nav a:hover {
+                text-decoration: underline;
+            }
+
+    .dashboard-content {
+        padding: 30px;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .card h5 {
+            font-size: 20px;
+        }
+
+    .footer {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 30px;
+        font-size: 14px;
+    }
+
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    h1 {
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #4a4a4a;
+    }
+
+    .table {
+        background-color: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .table th {
+            background-color: #007bff;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    .btn {
+        margin-right: 5px;
+    }
+
+    .action-btns .btn {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .container {
+        margin-top: 50px;
+        max-width: 90%;
+    }
+
+    .no-data {
+        font-style: italic;
+        color: #888;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 15px;
+        background-color: #343a40;
+        color: #ffffff;
+    }
+
+</style>

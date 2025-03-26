@@ -1,0 +1,133 @@
+﻿@model Clinic_WebApp.Models.Doctor
+@{
+    ViewData["Title"] = "CreateDoc";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Registration</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Doctor Registration</h1>
+        <form asp-action="CreateDoc" method="post">
+            <div>
+                <label for="dname">Doctor Name</label>
+                <input name="dname" type="text" id="dname" placeholder="Enter doctor's name" required />
+                <span asp-validation-for="dname" class="error"></span>
+            </div>
+
+            <div>
+                <label for="dspeciality">Speciality</label>
+                <input name="dspeciality" type="text" id="dspeciality" placeholder="Enter doctor's speciality" required />
+                <span asp-validation-for="dspeciality" class="error"></span>
+            </div>
+
+            <div>
+                <label for="dphone">Phone Number</label>
+                <input asp-for="dphone" type="tel" id="dphone" placeholder="Enter doctor's phone number" required />
+                <span asp-validation-for="dphone" class="error"></span>
+            </div>
+
+            <input type="submit" value="Register Doctor" />
+        </form>
+    </div>
+</body>
+<style>
+    
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.container h1 {
+    font-size: 2rem;
+    color: #0078D7;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+    font-size: 1rem;
+}
+
+form input[type="text"], 
+form input[type="tel"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+form input[type="text"]:focus, 
+form input[type="tel"]:focus {
+    border-color: #0078D7;
+    background-color: #ffffff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 120, 215, 0.3);
+}
+
+form input[type="submit"] {
+    background-color: #0078D7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+form input[type="submit"]:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+form input[type="submit"]:active {
+    background-color: #003f8a;
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.error {
+    font-size: 0.9rem;
+    color: red;
+    margin-top: 5px;
+}
+
+
+</style>
+</html>
+
+

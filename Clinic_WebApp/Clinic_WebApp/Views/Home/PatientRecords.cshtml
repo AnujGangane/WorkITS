@@ -1,0 +1,233 @@
+﻿@model List<Clinic_WebApp.Models.BookAppoitment>
+@inject IHttpContextAccessor Accessor
+@{
+    ViewData["Title"] = "PatientRecords";
+    var appointments = ViewData["Appointments"] as List<BookAppoitment>;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Welcome, @Accessor.HttpContext.Session.GetString("DoctorName")</h1>
+        <p>Your personalized dashboard</p>
+    </header>
+    <nav class="dashboard-nav">
+        <div>
+            <a href="/Home/ViewAppointments">View Appointments</a>
+            <a href="/Home/ManageProfile">Manage Profile</a>
+            <a href="/Home/PatientRecords">Patient Records</a>
+        </div>
+        <a href="/Home/Logout">Logout</a>
+    </nav>
+    <main class="dashboard-content">
+
+
+        <h1 class="text-center">Appointments</h1>
+        <table class="table table-bordered table-striped mt-4">
+            <thead class="table-primary">
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Patient Name</th>
+                    <th>Patient Email</th>
+                    <th>Patient Phone</th>
+                    <th>Patient Date</th>
+                    <th>Patient Disease/Message</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var appointment in Model)
+                    {
+                        <tr>
+                            <td>@appointment.patientID</td>
+                            <td>@appointment.pname</td>
+                            <td>@appointment.pemail</td>
+                            <td>@appointment.pphone</td>
+                            <td>@appointment.pdate</td>
+                            <td>@appointment.pmsg</td>
+                            
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center">No accepted appointments found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+    <footer class="footer">
+        &copy; 2025 Our Hospital. All Rights Reserved.
+    </footer>
+</body>
+<style>
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+        margin-right: 5px;
+    }
+
+    .accept-btn {
+        background-color: #28a745;
+        color: white;
+        border: none;
+    }
+
+        .accept-btn:hover {
+            background-color: #218838;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+    .reject-btn {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+    }
+
+        .reject-btn:hover {
+            background-color: #c82333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+    .btn:active {
+        transform: scale(0.98);
+    }
+
+    .dashboard-header {
+        background-color: #007bff;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .dashboard-header p {
+            margin: 5px 0 0;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+    .dashboard-nav {
+        background-color: #343a40;
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .dashboard-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+            .dashboard-nav a:hover {
+                text-decoration: underline;
+            }
+
+    .dashboard-content {
+        padding: 30px;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .card h5 {
+            font-size: 20px;
+        }
+
+    .footer {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 30px;
+        font-size: 14px;
+    }
+
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    h1 {
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #4a4a4a;
+    }
+
+    .table {
+        background-color: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .table th {
+            background-color: #007bff;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    .btn {
+        margin-right: 5px;
+    }
+
+    .action-btns .btn {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .container {
+        margin-top: 50px;
+        max-width: 90%;
+    }
+
+    .no-data {
+        font-style: italic;
+        color: #888;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 15px;
+        background-color: #343a40;
+        color: #ffffff;
+    }
+
+</style>
+
+
